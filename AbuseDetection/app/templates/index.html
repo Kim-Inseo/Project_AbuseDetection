@@ -1,0 +1,58 @@
+<!-- 프론트엔드 -->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>악성 글 탐지 시스템</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h2>글 입력</h2>
+    <textarea id="comment_input" placeholder="글(단문)을 입력하세요."></textarea>
+    <button id="submit_comment">글 작성</button>
+
+    <h3>글 목록</h3>
+    <ul id="comment_list"></ul>
+
+    <script>
+        $(document).ready(function() {
+            function getCSRFToken() {
+                return document.cookie.split('; ')
+                    .find(row => row.startsWith('csrftoken'))
+                    ?.split('=')[1];
+            }
+
+            $("#submit_comment").click(function() { // submit_comment(글 작성) 버튼 클릭 시
+                let comment = $("#comment_input").val();
+                let csrftoken = getCSRFToken(); // CSRF 토큰 가져오기
+
+                $.ajax({
+                    url: "/check_comment/",
+                    type: "POST",
+                    data: { comment: comment },
+                    headers: { 'X-CSRFToken': csrftoken }, // CSRF 토큰 추가
+                    success: function(response) {
+                        let commentText = response.comment;
+                        let isAbuse = response.is_abuse;
+                        let probability = response.probability;
+
+                        let commentClass = (isAbuse === 'ABUSE') ? 'abuse-comment' : '';
+
+                        let commentHtml = `
+                            <li>
+                                <span class="${commentClass}">${commentText}</span>
+                                <span class="probability"> (악성 확률: ${(probability * 100).toFixed(1)}%)</span>
+                            </li>
+                        `;
+
+                        $("#comment_list").append(commentHtml);
+                        $("#comment_input").val("");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

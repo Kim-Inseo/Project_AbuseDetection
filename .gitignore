@@ -1,0 +1,56 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Django migrations
+AbuseDetection/**/migrations/*.py
+AbuseDetection/**/migrations/*.pyc
+AbuseDetection/**/migrations/__pycache__/
+
+# Django secrets / env
+AbuseDetection/.env
+
+# SQLite database (assuming it's under AbuseDetection/)
+AbuseDetection/*.sqlite3
+
+# Logs
+*.log
+
+# PyTorch model files
+*.pth
+*.pt
+
+# Checkpoints or outputs
+*.ckpt
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Dataset or temporary files (assuming under AbuseDetection/)
+AbuseDetection/**/*.csv
+AbuseDetection/**/*.tsv
+AbuseDetection/**/*.txt
+AbuseDetection/**/*.dict
+AbuseDetection/**/*.json
+
+# VSCode and IDE-specific
+.vscode/
+.idea/
+
+# Chrome extension specific
+chrome_extension/*.zip
+chrome_extension/node_modules/
+chrome_extension/config.js
+
+# OS-specific
+.DS_Store
+Thumbs.db

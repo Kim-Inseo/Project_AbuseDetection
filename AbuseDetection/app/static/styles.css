@@ -1,0 +1,31 @@
+/* 로컬 실행용 */
+.abuse-comment {
+    filter: blur(5px);
+    color: transparent;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Chrome 배포용 */
+/* blur된 댓글에 커서 모양 설정 */
+#content-text {
+    cursor: pointer;
+}
+
+/* 툴팁 스타일 */
+.abuse-tooltip {
+    position: fixed; /* 화면 기준 고정 */
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: 6px;
+    z-index: 99999;
+    opacity: 0; /* 시작할 때는 투명 */
+    white-space: nowrap;
+    pointer-events: none; /* 마우스로 툴팁 클릭 방지 */
+    transition: opacity 0.2s ease;
+    backdrop-filter: none; /* blur 효과 무시 */
+    display: block;
+}
+
+

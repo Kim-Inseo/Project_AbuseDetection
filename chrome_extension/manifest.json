@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Abuse Detection (Project)",
+  "version": "1.0",
+  "description": "YouTube 댓글 중 악성 댓글을 감지하고 흐리게 처리합니다.",
+  "permissions": [
+    "scripting",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://www.youtube.com/*",
+    "https://*.ngrok-free.app/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://www.youtube.com/*"],
+      "js": ["config.js", "content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "YouTube 악성 댓글 감지"
+  }
+}
